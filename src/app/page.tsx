@@ -122,10 +122,13 @@ const lessonScripts: Record<string, LessonScript> = {
   },
   queue: {
     paragraphs: [
-      "Merhaba Umut. Queue yani kuyruk, market kasası gibi çalışır. Sıraya ilk giren kişi önce işlem görür. Bu yüzden queue mantığına FIFO denir: First In, First Out.",
-      "`Enqueue` kuyruğun arkasına eleman ekler. `Dequeue` kuyruğun önündeki elemanı çıkarır. `Peek` öndeki elemana sadece bakar.",
-      "Stack ile queue'yu karıştırmamak için şunu aklında tut: Stack tabak yığınıdır, en son gelen çıkar. Queue market sırasıdır, ilk gelen çıkar.",
-      "Kuyruk sorularında çizimi yatay yap. Sol taraf ön, sağ taraf arka olsun. Enqueue sağa ekler, Dequeue soldan siler.",
+      "Merhaba Umut. Queue yani kuyruk konusunu bu sefer yavaş yavaş kuracağız. Kuyruk, günlük hayatta bildiğin sıra mantığıdır: market kasasında, hastanede, yemekhane sırasında, yazıcı kuyruğunda ilk gelen kişi veya iş önce işlem görür.",
+      "Queue'nun en önemli kuralı FIFO'dur: First In, First Out. Türkçesi: İlk giren ilk çıkar. Bu cümleyi ezberlemek yetmez; mantığını görmen lazım. Sıraya ilk giren kişi kasaya en yakın kişidir. Yeni gelenler onun önüne geçmez, sıranın arkasına eklenir.",
+      "Queue'da iki uç vardır. Ön taraf yani `front`, çıkış kapısıdır. Arka taraf yani `rear`, giriş kapısıdır. Yeni eleman kuyruğa girerken arkaya eklenir. Eleman çıkarken önden çıkar. Bu yüzden queue'yu yatay çizmek stack'e göre çok daha anlaşılırdır.",
+      "`Enqueue` kuyruğun arkasına eleman ekler. Bunu 'sıraya yeni kişi geldi ve en arkaya geçti' diye düşün. `Dequeue` kuyruğun önündeki elemanı çıkarır. Bunu 'kasadaki kişi işini bitirdi ve sıradan çıktı' diye düşün.",
+      "`Peek` ise öndeki elemana sadece bakar. Yani kasada sıradaki kişi kim diye bakıyorsun ama kişiyi sıradan çıkarmıyorsun. `Dequeue` çıkarır, `Peek` çıkarmaz. Sınavda bu fark çok sık tuzak olur.",
+      "Stack ile queue'yu karıştırmamak için iki resmi aklında tut: Stack tabak yığınıdır, en son gelen çıkar. Queue market sırasıdır, ilk gelen çıkar. Stack dikey düşünülür; queue yatay düşünülür.",
+      "Queue işlem sorusu çözerken asla kafadan hızlı geçme. Sol tarafa `Ön`, sağ tarafa `Arka` yaz. `Enqueue` gelirse sağa ekle. `Dequeue` gelirse soldakini sil. `Peek` gelirse soldakini oku ama silme.",
     ],
     exampleTitle: "Kuyrukta geriye ne kalır?",
     exampleSteps: [
@@ -266,10 +269,11 @@ const lessonDeepDives: Record<string, string[]> = {
     "Arama sorularında 'kaçıncı adımda bulunur?' denirse animasyon gibi takip et: linear search için soldan say, binary search için orta değerleri sırayla yaz. Tahmin etme; küçük tablo çiz.",
   ],
   queue: [
-    "Queue'yu yazıcı kuyruğu olarak da düşün. Yazıcıya ilk gönderilen belge önce basılır. Son gelen belge sıranın önüne geçemez. Bu yüzden FIFO mantığı çok doğaldır.",
-    "Queue işlem sorularında yatay çizim kullan. Sol tarafa `front` veya `ön`, sağ tarafa `rear` veya `arka` yaz. `Enqueue` her zaman arkaya ekler. `Dequeue` her zaman önden çıkarır.",
-    "`Peek` queue'da da sadece bakar. Stack'te tepeye bakıyorduk; queue'da ön tarafa bakıyoruz. Ama ikisinde de ortak fikir şudur: Peek silmez.",
-    "Dizi tabanlı kuyrukta önden eleman silmek bazen maliyetlidir çünkü kalan elemanları sola kaydırman gerekebilir. Dairesel kuyruk fikri bu kaydırma maliyetini azaltmak için kullanılır, ama final listende daha çok temel queue işlemleri bekleniyor.",
+    "Yazıcı kuyruğu örneği de çok iyi çalışır. Bir sınıfta üç kişi aynı yazıcıya belge gönderdi diyelim. İlk belge önce basılır. Son belge yazıcıya sonradan geldiği için sıranın arkasında bekler. Bilgisayar bunu queue ile temsil eder.",
+    "Sınavda `Enqueue(5), Enqueue(2), Dequeue(), Peek()` gibi soru görünce önce boş kuyruk çiz. Her işlemi tek tek uygula. `Enqueue(5)` sonrası kuyruk 5 olur. `Enqueue(2)` sonrası 5, 2 olur. `Dequeue()` 5'i çıkarır. `Peek()` artık 2'yi gösterir.",
+    "Queue ile stack arasındaki farkı işlem üzerinden düşün. `Push(5), Push(2), Pop()` stack'te 2'yi çıkarır. Ama `Enqueue(5), Enqueue(2), Dequeue()` queue'da 5'i çıkarır. Aynı sayılar, farklı veri yapısı, farklı sonuç.",
+    "Dizi tabanlı kuyrukta önden eleman silmek bazen maliyetlidir çünkü kalan elemanları sola kaydırman gerekebilir. Bu yüzden bazı kuyruk uygulamalarında `front` ve `rear` indisleri tutulur. Böylece elemanları sürekli kaydırmak yerine ön ve arka göstergeleri hareket ettirilir.",
+    "Dairesel kuyruk fikri de buradan doğar. Dizinin sonuna gelince boş yer varsa başa sarabilirsin. Ama bu finalde asıl odak temel queue işlemleri: Enqueue arkaya, Dequeue öne, Peek öne bakar.",
   ],
   sorting: [
     "Bubble Sort'ta bir turu takip ederken sadece komşu iki elemanı karşılaştır. Bütün diziyi tek hamlede sıralamaya çalışma. Büyük olan sağa doğru kabarcık gibi ilerler.",
@@ -318,7 +322,7 @@ const lessonInlineVisuals: Record<string, Record<number, string[]>> = {
   "big-o": { 1: ["growth"], 5: ["growth"] },
   stack: { 2: ["stack"], 6: ["stack"] },
   search: { 2: ["linear-search"], 6: ["search"], 8: ["search-choice"] },
-  queue: { 1: ["queue"], 5: ["queue"] },
+  queue: { 1: ["queue"], 6: ["queue"], 10: ["queue-array"] },
   sorting: { 1: ["bubble-pass"], 2: ["sorting"], 4: ["counting-sort"] },
   hash: { 2: ["hash"], 8: ["linear-probing"] },
   "linked-list": { 2: ["linked"], 8: ["linked-cost"] },
@@ -1092,8 +1096,8 @@ const animationFrames: Record<string, VisualFrame[]> = {
   ],
   search: [
     {
-      title: "Binary search ortadan başlar",
-      caption: "Aranan 10. Sıralı dizide ilk kontrol ortadaki 6'dır.",
+      title: "Hedef: 10 sayısını bul",
+      caption: "Önce hedefi netleştir: Bu sıralı dizide 10'u arıyoruz. Binary search ilk olarak ortaya bakacak.",
       cells: [
         { label: "2" },
         { label: "4" },
@@ -1127,8 +1131,8 @@ const animationFrames: Record<string, VisualFrame[]> = {
   ],
   "linear-search": [
     {
-      title: "Linear search soldan başlar",
-      caption: "Aranan 7. Dizi karışık olduğu için ilk elemandan başlayıp tek tek kontrol ederiz.",
+      title: "Hedef: 7 sayısını bul",
+      caption: "Önce hedefi netleştir: Bu karışık dizide 7'yi arıyoruz. Sıralı olmadığı için soldan tek tek bakacağız.",
       cells: [
         { label: "5", state: "active" },
         { label: "9" },
@@ -1386,11 +1390,39 @@ const animationFrames: Record<string, VisualFrame[]> = {
   ],
   queue: [
     {
-      title: "Enqueue arkaya ekler",
-      caption: "5 ilk geldi, 2 onun arkasına, 8 en arkaya geçti.",
+      title: "Hedef: kuyrukta ne kalır?",
+      caption: "İşlemler: Enqueue(5), Enqueue(2), Enqueue(8), Dequeue(), Peek(). Önce boş kuyruğu düşün.",
+      queue: [
+        { label: "Ön", state: "muted" },
+        { label: "boş", state: "warning" },
+        { label: "Arka", state: "muted" },
+      ],
+    },
+    {
+      title: "Enqueue(5): 5 arkaya girer",
+      caption: "Kuyruk boş olduğu için 5 hem öndeki hem arkadaki elemandır.",
       queue: [
         { label: "Ön", state: "muted" },
         { label: "5", state: "active" },
+        { label: "Arka", state: "muted" },
+      ],
+    },
+    {
+      title: "Enqueue(2): 2 en arkaya eklenir",
+      caption: "5 daha önce geldiği için önde kalır. 2 onun arkasına geçer.",
+      queue: [
+        { label: "Ön", state: "muted" },
+        { label: "5", state: "found" },
+        { label: "2" },
+        { label: "Arka", state: "muted" },
+      ],
+    },
+    {
+      title: "Enqueue(8): 8 en arkaya eklenir",
+      caption: "Yeni gelen kimse sıranın sonuna geçer. Kuyruk artık 5, 2, 8.",
+      queue: [
+        { label: "Ön", state: "muted" },
+        { label: "5", state: "found" },
         { label: "2" },
         { label: "8", state: "new" },
         { label: "Arka", state: "muted" },
@@ -1398,7 +1430,7 @@ const animationFrames: Record<string, VisualFrame[]> = {
     },
     {
       title: "Dequeue önden çıkarır",
-      caption: "İlk gelen 5 çıkar. Queue stack gibi sondan çıkarmaz.",
+      caption: "Dequeue arkadaki 8'i değil, öndeki 5'i çıkarır. Çünkü ilk giren ilk çıkar.",
       queue: [
         { label: "Ön", state: "muted" },
         { label: "2", state: "found" },
@@ -1407,13 +1439,55 @@ const animationFrames: Record<string, VisualFrame[]> = {
       ],
     },
     {
-      title: "Geriye kalan sıra",
-      caption: "Kuyrukta soldan sağa 2, 8 kaldı.",
+      title: "Peek öne bakar ama silmez",
+      caption: "Peek sonucu 2'dir. Ama 2 kuyruktan çıkmaz; sadece öndeki eleman okunur.",
       queue: [
         { label: "Ön", state: "muted" },
         { label: "2", state: "found" },
         { label: "8", state: "new" },
         { label: "Arka", state: "muted" },
+      ],
+    },
+    {
+      title: "Son durum: kuyrukta 2 ve 8 kalır",
+      caption: "İşlem sonucu sorulursa cevabı soldan sağa yaz: 2, 8. Öndeki 2, arkadaki 8.",
+      queue: [
+        { label: "Ön", state: "muted" },
+        { label: "2", state: "found" },
+        { label: "8", state: "found" },
+        { label: "Arka", state: "muted" },
+      ],
+    },
+  ],
+  "queue-array": [
+    {
+      title: "Diziyle kuyruk kurarsan front/rear tutarsın",
+      caption: "Dizide kutular var. `front` öndeki elemanı, `rear` son eklenen elemanı gösterir.",
+      cells: [
+        { label: "5", sub: "front" },
+        { label: "2" },
+        { label: "8", sub: "rear" },
+        { label: "boş", state: "muted" },
+      ],
+    },
+    {
+      title: "Dequeue olunca front ilerler",
+      caption: "5 çıktıktan sonra elemanları kaydırmak yerine front göstergesini 2'ye ilerletebilirsin.",
+      cells: [
+        { label: "5", sub: "çıktı", state: "muted" },
+        { label: "2", sub: "front", state: "found" },
+        { label: "8", sub: "rear" },
+        { label: "boş", state: "muted" },
+      ],
+    },
+    {
+      title: "Enqueue yeni değeri rear tarafına ekler",
+      caption: "9 gelirse arka tarafa eklenir ve rear 9'u gösterir.",
+      cells: [
+        { label: "5", sub: "boş", state: "muted" },
+        { label: "2", sub: "front", state: "found" },
+        { label: "8" },
+        { label: "9", sub: "rear", state: "new" },
       ],
     },
   ],
