@@ -532,7 +532,7 @@ export default function Home() {
 
           <div className="coverage-card">
             <strong>Kapsam kontrolü</strong>
-            <p>{lessons.length} ders, {examBank.length} soru, 5 farklı 20 soruluk deneme. Vize öncesi konular kısa tutuldu; final listesindeki başlıklar önde.</p>
+            <p>{lessons.length} ders, {examBank.length} soru, 5 farklı 20 soruluk deneme. Dersler temelden başlar; her konu bir sonrakinin altyapısını kurar.</p>
           </div>
         </aside>
 

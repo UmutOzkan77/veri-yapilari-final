@@ -29,7 +29,7 @@ export type Lesson = {
   practice: PracticeQuestion[];
 };
 
-export const lessons: Lesson[] = [
+const lessonCatalog: Lesson[] = [
   {
     id: "csharp",
     title: "C# Hayatta Kalma Kiti",
@@ -516,7 +516,7 @@ export const lessons: Lesson[] = [
   {
     id: "functions-string",
     title: "Fonksiyonlar ve String İşlemleri",
-    shortTitle: "String",
+    shortTitle: "Fonksiyon / String",
     minutes: 60,
     examWeight: 9,
     visual: "string",
@@ -621,6 +621,32 @@ export const lessons: Lesson[] = [
     ],
   },
 ];
+
+// Ders kimlikleri ilerleme kayıtlarında kullanılıyor. Kataloğu yerinde
+// bırakıp yalnızca eğitim yolunu sıralamak, mevcut öğrenci ilerlemesini korur.
+const learningOrder = [
+  "csharp",
+  "functions-string",
+  "big-o",
+  "search",
+  "sorting",
+  "stack",
+  "queue",
+  "linked-list",
+  "circular-doubly",
+  "hash",
+  "trees",
+] as const;
+
+export const lessons: Lesson[] = learningOrder.map((lessonId) => {
+  const lesson = lessonCatalog.find((item) => item.id === lessonId);
+
+  if (!lesson) {
+    throw new Error(`Ders kataloğunda '${lessonId}' bulunamadı.`);
+  }
+
+  return lesson;
+});
 
 function q(
   id: string,
